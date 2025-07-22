@@ -12,8 +12,8 @@ const app = express();
 
 // ✅ Flexible CORS setup
 const allowedOrigins = [
-  'https://chat-app-frontend-tt7i.onrender.com/',
-  'https://socketspeak-client.onrender.com/',
+  'https://chat-app-frontend-tt7i.onrender.com',
+  'https://socketspeak-client.onrender.com',
   'http://localhost:5173'
 ];
 
