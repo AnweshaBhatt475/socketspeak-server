@@ -1,62 +1,44 @@
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const connectDB = require('./config/connectDB');
 const router = require('./routes/index');
-const cookieParser = require('cookie-parser');
 
+// Setup
 const app = express();
-
-
-
-
-// ✅ Flexible CORS setup
 const allowedOrigins = [
   'https://chat-app-frontend-tt7i.onrender.com',
   'https://socketspeak-client.vercel.app',
-  'http://localhost:5173'
+  'http://localhost:5173',
 ];
 
-const corsOptions = {
-  origin: function (origin, callback) {
+app.use(cors({
+  origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+      return callback(null, true);
     }
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // ✅ Handle preflight
-
-
+}));
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ WebSocket setup
+// WebSocket
 const { app: socketApp, server } = require('./socket/index');
 socketApp.use(app);
 
-// ✅ Port
-const PORT = process.env.PORT || 4001;
-
-// ✅ Health check route
-app.get('/', (req, res) => {
-  res.json({ message: `Server running at ${PORT}` });
-});
-
-// ✅ API routes
+// Routes
 app.use('/api', router);
 
+// Health check
+app.get('/', (req, res) => {
+  res.json({ message: 'Server running' });
+});
 
-
-
-
-
-
-// ✅ DB connection + start server
+// DB & Server Start
+const PORT = process.env.PORT || 4001;
 connectDB().then(() => {
   server.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
