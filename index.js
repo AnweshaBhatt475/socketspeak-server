@@ -13,11 +13,11 @@ const app = express();
 // ✅ Flexible CORS setup
 const allowedOrigins = [
   'https://chat-app-frontend-tt7i.onrender.com',
-  'https://socketspeak-client.onrender.com',
+  'https://socketspeak-client.vercel.app',
   'http://localhost:5173'
 ];
 
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -26,7 +26,11 @@ app.use(cors({
     }
   },
   credentials: true,
-}));
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // ✅ Handle preflight
+
 
 app.use(express.json());
 app.use(cookieParser());
