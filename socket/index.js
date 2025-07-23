@@ -18,6 +18,7 @@ const io = new Server(server, {
     origin: [
       'http://localhost:5173',
       'https://socketspeak-client.vercel.app',
+      'https://socketspeakclient.vercel.app',
       'https://chat-app-frontend-tt7i.onrender.com',
     ],
     credentials: true,
