@@ -9,8 +9,8 @@ const router = require('./routes/index');
 const app = express();
 const allowedOrigins = [
   'https://chat-app-frontend-tt7i.onrender.com',
-  'https://socketspeak-client.vercel.app',
-  'https://socketspeakclient.vercel.app',
+  'https://socketspeak-client.onrender.com',
+  'https://socketspeakclient.onrender.com',
   'http://localhost:5173',
 ];
 
