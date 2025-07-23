@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 
-const GroupSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String },
-  admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
-  groupImage: { type: String, default: '' },
+const groupSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  messages: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Message',
+  }],
 }, { timestamps: true });
 
-module.exports = mongoose.model('Group', GroupSchema);
+// ✅ Fix: Prevent OverwriteModelError
+const Group = mongoose.models.Group || mongoose.model('Group', groupSchema);
+
+module.exports = Group;
