@@ -10,6 +10,7 @@ const app = express();
 const allowedOrigins = [
   'https://chat-app-frontend-tt7i.onrender.com',
   'https://socketspeak-client.vercel.app',
+  'https://socketspeakclient.vercel.app',
   'http://localhost:5173',
 ];
 
