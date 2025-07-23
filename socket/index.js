@@ -17,8 +17,8 @@ const io = new Server(server, {
   cors: {
     origin: [
       'http://localhost:5173',
-      'https://socketspeak-client.vercel.app',
-      'https://socketspeakclient.vercel.app',
+       'https://socketspeak-client.onrender.com',
+       'https://socketspeakclient.onrender.com',
       'https://chat-app-frontend-tt7i.onrender.com',
     ],
     credentials: true,
